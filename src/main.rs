@@ -26,7 +26,7 @@ struct Args {
 
 async fn amazon_search(string: &str, page: u8) -> reqwest::Result<String> {
     let body = reqwest::get(format!(
-        "https://www.amazon.com/s?k={}&page={}",
+        "https://www.amazon.com/s?k={}&page={}&s=review-rank",
         string, page
     ))
     .await?

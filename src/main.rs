@@ -95,6 +95,6 @@ async fn main() {
         }
         println!("{:#?}", avg);
     } else {
-        println!("{:#?}", amazon_get_pricing_raw(search_term, pages).await);
+        println!("{:#?}", raw);
     }
 }

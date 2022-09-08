@@ -26,8 +26,7 @@ struct Args {
 
 async fn amazon_search(string: &str, page: u8) -> reqwest::Result<String> {
     let body = reqwest::get(format!(
-        "https://www.amazon.com/s?k={}&page={}&s=review-rank",
-        string, page
+        "https://www.amazon.com/s?k={string}&page={page}&s=review-rank",
     ))
     .await?
     .text()
@@ -62,13 +61,14 @@ async fn amazon_get_pricing_raw(input: &str, page: u8) -> Vec<f32> {
     }
     final_res.sort_by(|a, b| a.partial_cmp(b).unwrap());
     final_res.dedup();
-    final_res = final_res[((final_res.len() as f32 / 5.) as usize)..final_res.len() - 1].into();
+    final_res = final_res[((final_res.len() as f32 / 8.) as usize)..final_res.len() - 1].into();
     final_res
 }
 
 fn calc_avg_pricing(input: Vec<f32>) -> f32 {
     (((input.iter().sum::<f32>() / input.len() as f32) * 100.).round()) / 100.
 }
+
 
 #[main]
 async fn main() {
